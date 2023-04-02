@@ -7,13 +7,14 @@ import math
 
 def scrap_pexels(query=''):
     headers = {"Authorization": f'your_api_key'}
-    query_str = f'https://api.pexels.com/v1/search?query={query}&per_page=80&orientation=landscape'
+    query_str = f'https://api.pexels.com/v1/search'
 
     proxies = {
         'https': f'your_proxy'
     }
-
-    response = requests.get(url=query_str, headers=headers, proxies=proxies)
+    params = {"query": query, "per_page": "80", "orientation": "landscape"}
+    
+    response = requests.get(url=query_str, headers=headers, proxies=proxies, params=params)
 
     if response.status_code != 200:
         return f'Ошибка: Статус код - {response.status_code}, {response.json()}'
